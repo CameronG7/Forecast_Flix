@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -37,22 +36,40 @@
     </header>
     <div class="container">
       <div class="row">
-        <div id="location-card" class="col-3">
+        <div id="search">
+          <form class="d-grid gap-2 pb-2 mx-auto" style="width: 80%">
+            <div class="mb-3">
+              <h1 class="pb-3">Search for a City:</h1>
+              <!-- user input -->
+              <input
+                type="text"
+                id="cityInput"
+                class="form-control"
+                placeholder="Los Angeles"
+              />
+            </div>
+            <button id="searchButton" class="btn btn-primary" type="button">
+              Search
+            </button>
+            <hr class="border border-primary" />
+          </form>
+        </div>
+
+        <div id="weather-card" class="col-3">
           <div class="card">
             <img
               src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
               class="card-img-top"
               alt="Fissure in Sandstone"
             />
-            <div class="form-outline">
-              <input type="text" id="typeText" class="form-control" />
-              <label class="form-label text-center" for="typeText"
-                >Location</label
-              >
-            </div>
+
             <div class="card-body">
-              <h5 class="card-title">Thunderstorm</h5>
-              <p class="card-text">
+              <h5 class="card-title">Weather Conditions</h5>
+              <p class="card-text" id="temperature">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <p class="card-text" id="weather-description">
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
