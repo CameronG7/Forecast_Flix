@@ -44,6 +44,7 @@ var $textInput = $("#cityInput");
 var $searchCard = $("#search");
 var $weatherCard = $("#weather-card");
 var $movieCard = $("#movie-card");
+var $modalBtn1 = $('#modalBtn');
 
 var $loadingEl = $('h2');
 $loadingEl.text('Looking for the weather in your area...');
@@ -59,12 +60,19 @@ $searchBtn.on('click', function (event) {
 
   var location = $textInput.val();
 
+  if (location === ""){
+    $modalBtn1.click();
+    return;
+  }
+
   $searchCard.hide();
   loadingScreen();
 
 });
 
 $newSearchBtn.on('click', function (event) {
+
+location = "";
 
   $weatherCard.hide();
   $movieCard.hide();
@@ -193,4 +201,4 @@ function getMovie() {
 
 
  
-
+}

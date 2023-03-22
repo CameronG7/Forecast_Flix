@@ -5,6 +5,14 @@
    
 }
 
+#search h1 {
+    font-family: 'Sono', sans-serif;
+}
+
+#modalBtn {
+    display: none;
+}
+
 #main-tilte {
     font-size: 50px;
 }
