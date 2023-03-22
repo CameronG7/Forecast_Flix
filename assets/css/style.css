@@ -1,3 +1,24 @@
+
+#home-title {
+    font-family: 'Sono', sans-serif;
+    font-size: 17px;
+   
+}
+
+#main-tilte {
+    font-size: 50px;
+}
+
+body {
+    background-color: rgb(175, 175, 174);
+    
+}
+
 h2 {
     display: none;
+}
+
+#weather-description {
+    background-color: whitesmoke;
+    font-family: 'Times New Roman', Times, serif;
 }
