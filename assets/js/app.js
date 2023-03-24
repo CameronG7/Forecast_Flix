@@ -6,6 +6,18 @@ const MOVIEKEY = config.MOVIEKEY;
 // 	 //need this
 // 	fetchWeather(); //need this
 // });
+
+$(document).keypress(function(event) {
+  var keycode = event.keyCode || event.which;
+  if(keycode == '13') {
+    event.preventDefault();
+      $searchCard.hide();
+      loadingScreen();
+      getMovie();
+  }
+});
+
+
 function fetchWeather() { //start Liza
 	var key = "0d556524fc925415c387efcd51d5b68a"; //cameron it didnt workvar searchedName = data.city.name;
 	var newCity = $("#cityInput").val();
@@ -70,11 +82,11 @@ $searchBtn.on('click', function (event) {
 
   $searchCard.hide();
   loadingScreen();
-
+ getMovie()
 });
 
 $newSearchBtn.on('click', function (event) {
-
+event.preventDefault();
 location = "";
 
   $weatherCard.hide();
@@ -139,7 +151,7 @@ fetchWeather();
 		// with those genres i choose movies to grab
 		// then i display the movie information ( picture, tagline , rating and category)
     let genre ={}
-		if (weather_conditions === "01d" || "01n") { // only first weather condition works FIX
+		if (weather_conditions === "01d" || weather_conditions === "01n") { // only first weather condition works FIX
 			//comedy
       console.log("the weather condition worked");
 			genre = {
@@ -147,50 +159,50 @@ fetchWeather();
 				id2: null,
 			};
       console.log( genre );
-		} else if (weather_conditions === "02d" || "02n") {
+		} else if (weather_conditions === "02d" || weather_conditions === "02n") {
 			//action adventure
 			genre = {
 				id1: 28,
 				id2: 12,
 			};
-		} else if (weather_conditions === "03d" || "03n") {
+		} else if (weather_conditions === "03d" || weather_conditions === "03n") {
 			//mystery
 			genre = {
 				id1: 9648,
 				id2: null,
 			};
-		} else if (weather_conditions === "04d" || "04n") {
+		} else if (weather_conditions === "04d" || weather_conditions === "04n") {
 			//scifi
 			genre = {
 				id1: 878,
 				id2: null,
 				id2: null,
 			};
-		} else if (weather_conditions === "09d" || "09n") {
+		} else if (weather_conditions === "09d" || weather_conditions === "09n") {
 			//drama thriller
 			genre = {
 				id1: 18,
 				id2: 53,
 			};
-		} else if (weather_conditions === "10d" || "10n") {
+		} else if (weather_conditions === "10d" || weather_conditions === "10n") {
 			//documentary
 			genre = {
 				id1: 99,
 				id2: null,
 			};
-		} else if (weather_conditions === "11d" || "11n") {
+		} else if (weather_conditions === "11d" || weather_conditions === "11n") {
 			//crime
 			genre = {
 				id1: 80,
 				id2: null,
 			};
-		} else if (weather_conditions === "13d" || "13n") {
+		} else if (weather_conditions === "13d" || weather_conditions === "13n") {
 			//family animation
 			genre = {
 				id1: 10571,
 				id2: 16,
 			};
-		} else if (weather_conditions === "50d" || "50n") {
+		} else if (weather_conditions === "50d" || weather_conditions === "50n") {
 			genre = {
 				id1: 35,
 				id2: 10749,

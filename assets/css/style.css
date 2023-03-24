@@ -1,8 +1,12 @@
 
 #home-title {
     font-family: 'Sono', sans-serif;
-    font-size: 17px;
+    font-size: 19px;
    
+}
+
+#home-title h1 {
+    font-size: 60px;
 }
 
 div p {
