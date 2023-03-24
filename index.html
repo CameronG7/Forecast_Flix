@@ -57,7 +57,7 @@
                 type="text"
                 id="cityInput"
                 class="form-control"
-                placeholder="Los Angeles"
+                placeholder="ex: Los Angeles, New York etc..."
               />
             </div>
             <button id="searchButton" class="btn btn-primary" type="button">
@@ -76,16 +76,15 @@
             />
 
             <div class="card-body">
+
               <h5 id="cityWeather" class="card-title">Weather Conditions</h5>
               <p class="card-text" id="temperature">
               </p>
+
               <p class="card-text" id="weather-description">
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#!" id="newSeachButton" class="btn btn-primary"
-                >Button</a
-              >
             </div>
           </div>
         </div>
@@ -94,6 +93,7 @@
 
         <div id="movie-card" class="col-3">
           <div class="card">
+
 
             <div class="card-body">
               <h5 id="movieTitle" class="card-title">Fight Club</h5>
@@ -105,7 +105,7 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <a href="#!" class="btn btn-primary" id="newSearchButton">Button</a>
+              <a href="#!" class="btn btn-primary" id="newSearchButton">Home</a>
             </div>
           </div>
         </div>
@@ -219,13 +219,56 @@
         </div>
       </section>
       <!-- Section: Links  -->
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        id="modalBtn"
+        class="btn btn-primary"
+        data-mdb-toggle="modal"
+        data-mdb-target="#exampleModal"
+      >
+        Launch demo modal
+      </button>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-mdb-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">Need to input location</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-mdb-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Copyright -->
       <div
         class="text-center p-4"
         style="background-color: rgba(0, 0, 0, 0.05)"
       >
-        © 2021 Copyright:
+        © 2023 Copyright:
         <a
           class="text-reset fw-bold"
           href="https://www.themoviedb.org/?language=en-US"
@@ -237,16 +280,23 @@
     <!-- Footer -->
     <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 
-  
-   
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>
-        dayjs().format()
+      dayjs().format();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js" integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
 
     <script src="assets/js/config.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="assets/js/app.js"></script>
+    <!-- MDB -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+    ></script>
   </body>
 </html>

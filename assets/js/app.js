@@ -47,6 +47,7 @@ var $textInput = $("#cityInput");
 var $searchCard = $("#search");
 var $weatherCard = $("#weather-card");
 var $movieCard = $("#movie-card");
+var $modalBtn1 = $('#modalBtn');
 
 var $loadingEl = $("h2");
 $loadingEl.text("Looking for the weather in your area...");
@@ -58,18 +59,29 @@ $weatherCard.hide();
 $movieCard.hide();
 
 // When search button is clicked
-$searchBtn.on("click", function (event) {
-  event.preventDefault();
-	var location = $textInput.val();
-  getMovie();
-	$searchCard.hide();
-	loadingScreen();
+$searchBtn.on('click', function (event) {
+
+  var location = $textInput.val();
+
+  if (location === ""){
+    $modalBtn1.click();
+    return;
+  }
+
+  $searchCard.hide();
+  loadingScreen();
+
 });
 
-$newSearchBtn.on("click", function (event) {
-	$weatherCard.hide();
-	$movieCard.hide();
-	$searchCard.show();
+$newSearchBtn.on('click', function (event) {
+
+location = "";
+
+  $weatherCard.hide();
+  $movieCard.hide();
+  $searchCard.show();
+
+
 });
 
 // Function for the loading screen
@@ -189,6 +201,8 @@ fetchWeather();
                     sort_by=vote_count.desc&include_adult=false&include_video=false&page=1&vote_count.gte=1000&
                     vote_average.gte=8&with_genres=${genre.id1},${genre.id2}&with_original_language=en&watch_region=US&
                     with_watch_monetization_types=flatrate`;
+
+
     console.log(movieUrl);
 
 		fetch(movieUrl)
@@ -221,3 +235,4 @@ fetchWeather();
 			});
 			}, 1000);
 } // end of movie
+
