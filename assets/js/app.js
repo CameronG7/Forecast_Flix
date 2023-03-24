@@ -2,11 +2,11 @@ const WEATHERKEY = config.WEATHERKEY;
 const MOVIEKEY = config.MOVIEKEY;
 //placeholder for searchbtn dnu
 // let searchBtn = $("#searchButton");
-// searchBtn.on("click", function (event) {
+// searchBtn.on("click", function (event) { // second search onclick
 // 	 //need this
 // 	fetchWeather(); //need this
 // });
-function fetchWeather() {
+function fetchWeather() { //start Liza
 	var key = "0d556524fc925415c387efcd51d5b68a"; //cameron it didnt workvar searchedName = data.city.name;
 	var newCity = $("#cityInput").val();
 	//this will be var location
@@ -39,7 +39,9 @@ function fetchWeather() {
       return cityIcon;
 		});
 }
+//end Liza
 
+//start Marcus
 var $searchBtn = $("#searchButton");
 var $textInput = $("#cityInput");
 var $searchCard = $("#search");
@@ -100,7 +102,9 @@ function loadingScreen() {
 		}
 	}, 1000);
 }
+//end marcus 
 
+//start Cameron
 const weatherIconList = [
 	"01d","01n", //clear
 	 "02d","02n", // few clouds
@@ -123,7 +127,7 @@ fetchWeather();
 		// with those genres i choose movies to grab
 		// then i display the movie information ( picture, tagline , rating and category)
     let genre ={}
-		if (weather_conditions === "01d" || "01n") {
+		if (weather_conditions === "01d" || "01n") { // only first weather condition works FIX
 			//comedy
       console.log("the weather condition worked");
 			genre = {
@@ -188,31 +192,32 @@ fetchWeather();
     console.log(movieUrl);
 
 		fetch(movieUrl)
-			.then(function (response) {
+			.then(function (response) 
+			{
 				return response.json();
 			})
 			.then(function (data) 
-      {
-       console.log(data.results);
-        const movieTitleEl = $('#movieTitle')
-        const movieTagEL = $('#movieTag');
-        const releaseEL = $('#release');
-        let movieList = [];
-        for(let i =0; i < 4; i++) 
-        {
-          let newMovie = 
-          {
-            "title": data.results[i].title, 
-              "tagline": data.results[i].overview,
-                "released": dayjs(data.results[i].release_date).format('MM/DD/YYYY'),
-          }
-          movieList.push(newMovie)
-         }
-         movieTitleEl.text(movieList[0].title)
-         movieTagEL.text(movieList[0].tagline)
-         releaseEL.text(movieList[0].released)
+			{
+			console.log(data.results);
+				const movieTitleEl = $('#movieTitle')
+				const movieTagEL = $('#movieTag');
+				const releaseEL = $('#release');
+				let movieList = [];
+				for(let i =0; i < 4; i++) 
+				{
+				let newMovie = 
+				{
+					"title": data.results[i].title, 
+					"tagline": data.results[i].overview,
+						"released": dayjs(data.results[i].release_date).format('MM/DD/YYYY'),
+				}
+				movieList.push(newMovie)
+				}
+				movieTitleEl.text(movieList[0].title)
+				movieTagEL.text(movieList[0].tagline)
+				releaseEL.text(movieList[0].released)
 
 
-      });
-	}, 1000);
+			});
+			}, 1000);
 } // end of movie
