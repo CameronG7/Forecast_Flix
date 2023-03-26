@@ -6,6 +6,20 @@ const MOVIEKEY = config.MOVIEKEY;
 // 	 //need this
 // 	fetchWeather(); //need this
 // });
+
+$(document).keypress(function(event) {
+    var keycode = event.keyCode || event.which;
+    if(keycode == '13') {
+		event.preventDefault();
+        $searchCard.hide();
+  		loadingScreen();
+  		getMovie();
+
+
+    }
+});
+
+
 function fetchWeather() { //start Liza
 	var key = "0d556524fc925415c387efcd51d5b68a"; //cameron it didnt workvar searchedName = data.city.name;
 	var newCity = $("#cityInput").val();
@@ -132,6 +146,7 @@ const weatherIconList = [
 
 function getMovie() {
 fetchWeather();
+
 	setTimeout(function () {
 		let weather_conditions = cityIcon;
    console.log( weather_conditions);
