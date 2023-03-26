@@ -7,16 +7,38 @@ const MOVIEKEY = config.MOVIEKEY;
 // 	fetchWeather(); //need this
 // });
 
-$(document).keypress(function(event) {
-  var keycode = event.keyCode || event.which;
-  if(keycode == '13') {
-    event.preventDefault();
-      $searchCard.hide();
-      loadingScreen();
-      getMovie();
-  }
-});
 
+var $searchBtn = $("#searchButton");
+var $textInput = $("#cityInput");
+var $searchCard = $("#search");
+var $weatherCard = $("#weather-card");
+var $movieCard = $("#movie-card");
+var $modalBtn1 = $('#modalBtn');
+
+var $loadingEl = $("h2");
+var $newSearchBtn = $("#newSearchButton");
+
+$(document).keypress(function(event) {
+    var keycode = event.keyCode || event.which;
+	event.preventDefault();
+    if(keycode == '13') {
+        $searchCard.hide();
+        loadingScreen();
+        getMovie();
+
+         }
+    });
+
+function handleSubmit(event) {
+	event.preventDefault();
+	console.log("test")
+	$searchCard.hide();
+	loadingScreen();
+
+    getMovie();
+   
+
+};
 
 function fetchWeather() { //start Liza
 	var key = "0d556524fc925415c387efcd51d5b68a"; //cameron it didnt workvar searchedName = data.city.name;
@@ -54,24 +76,22 @@ function fetchWeather() { //start Liza
 //end Liza
 
 //start Marcus
-var $searchBtn = $("#searchButton");
-var $textInput = $("#cityInput");
-var $searchCard = $("#search");
-var $weatherCard = $("#weather-card");
-var $movieCard = $("#movie-card");
-var $modalBtn1 = $('#modalBtn');
 
-var $loadingEl = $("h2");
 $loadingEl.text("Looking for the weather in your area...");
 
-var $newSearchBtn = $("#newSearchButton");
+
 
 // Hide cards initially
 $weatherCard.hide();
 $movieCard.hide();
 
+
+
+
+
 // When search button is clicked
 $searchBtn.on('click', function (event) {
+	
 
   var location = $textInput.val();
 
@@ -82,7 +102,8 @@ $searchBtn.on('click', function (event) {
 
   $searchCard.hide();
   loadingScreen();
- getMovie()
+
+  getMovie();
 });
 
 $newSearchBtn.on('click', function (event) {
@@ -92,7 +113,6 @@ location = "";
   $weatherCard.hide();
   $movieCard.hide();
   $searchCard.show();
-
 
 });
 
@@ -141,6 +161,10 @@ const weatherIconList = [
 	        "50d","50n", // weird conditions
 ];
 
+				const movieTitleEl = $('#movieTitle')
+				const movieTagEL = $('#movieTag');
+				const ratingEL = $('#rating');
+let movieList = [];
 function getMovie() {
 fetchWeather();
 	setTimeout(function () {
@@ -165,7 +189,9 @@ fetchWeather();
 				id1: 28,
 				id2: 12,
 			};
-		} else if (weather_conditions === "03d" || weather_conditions === "03n") {
+
+		} else if (weather_conditions === "03d" ||  weather_conditions ==="03n") {
+
 			//mystery
 			genre = {
 				id1: 9648,
@@ -190,16 +216,20 @@ fetchWeather();
 				id1: 99,
 				id2: null,
 			};
-		} else if (weather_conditions === "11d" || weather_conditions === "11n") {
+
+		} else if (weather_conditions === "11d" ||  weather_conditions === "11n") {
+
 			//crime
 			genre = {
 				id1: 80,
 				id2: null,
 			};
-		} else if (weather_conditions === "13d" || weather_conditions === "13n") {
+
+		} else if (weather_conditions === "13d" ||  weather_conditions === "13n") {
+
 			//family animation
 			genre = {
-				id1: 10571,
+				id1: 10751,
 				id2: 16,
 			};
 		} else if (weather_conditions === "50d" || weather_conditions === "50n") {
@@ -225,26 +255,39 @@ fetchWeather();
 			.then(function (data) 
 			{
 			console.log(data.results);
-				const movieTitleEl = $('#movieTitle')
-				const movieTagEL = $('#movieTag');
-				const releaseEL = $('#release');
-				let movieList = [];
-				for(let i =0; i < 4; i++) 
+				// const movieTitleEl = $('#movieTitle')
+				// const movieTagEL = $('#movieTag');
+				// const releaseEL = $('#release');
+				
+				for(let i =0; i < 5; i++) 
 				{
 				let newMovie = 
 				{
 					"title": data.results[i].title, 
 					"tagline": data.results[i].overview,
-						"released": dayjs(data.results[i].release_date).format('MM/DD/YYYY'),
+						"rating": data.results[i].vote_average,
 				}
 				movieList.push(newMovie)
 				}
 				movieTitleEl.text(movieList[0].title)
 				movieTagEL.text(movieList[0].tagline)
-				releaseEL.text(movieList[0].released)
+				ratingEL.text(`Rating ${movieList[0].rating}`)
 
 
 			});
 			}, 1000);
 } // end of movie
 
+let $nextMovie = $('#nextMovie');
+let movieCount = 1
+$nextMovie.on('click',function (e) {
+	
+		movieTitleEl.text(movieList[movieCount].title)
+		movieTagEL.text(movieList[movieCount].tagline)
+		ratingEL.text(`Rating ${movieList[movieCount].rating}`)
+		movieCount++;
+		if (movieCount == 5){
+			movieCount = 0
+		}
+
+})
