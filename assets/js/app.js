@@ -7,6 +7,7 @@ const MOVIEKEY = config.MOVIEKEY;
 // 	fetchWeather(); //need this
 // });
 
+
 var $searchBtn = $("#searchButton");
 var $textInput = $("#cityInput");
 var $searchCard = $("#search");
@@ -101,18 +102,17 @@ $searchBtn.on('click', function (event) {
 
   $searchCard.hide();
   loadingScreen();
-  getMovie();
 
+  getMovie();
 });
 
 $newSearchBtn.on('click', function (event) {
-
+event.preventDefault();
 location = "";
 
   $weatherCard.hide();
   $movieCard.hide();
   $searchCard.show();
-
 
 });
 
@@ -189,7 +189,9 @@ fetchWeather();
 				id1: 28,
 				id2: 12,
 			};
+
 		} else if (weather_conditions === "03d" ||  weather_conditions ==="03n") {
+
 			//mystery
 			genre = {
 				id1: 9648,
@@ -214,13 +216,17 @@ fetchWeather();
 				id1: 99,
 				id2: null,
 			};
-		} else if (weather_conditions === "11d" ||  weather_conditions ==="11n") {
+
+		} else if (weather_conditions === "11d" ||  weather_conditions === "11n") {
+
 			//crime
 			genre = {
 				id1: 80,
 				id2: null,
 			};
-		} else if (weather_conditions === "13d" ||  weather_conditions ==="13n") {
+
+		} else if (weather_conditions === "13d" ||  weather_conditions === "13n") {
+
 			//family animation
 			genre = {
 				id1: 10751,
