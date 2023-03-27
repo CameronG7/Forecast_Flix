@@ -16,41 +16,78 @@ var $modalBtn1 = $('#modalBtn');
 
 var $loadingEl = $("h2");
 var $newSearchBtn = $("#newSearchButton");
+var locationVal = ""
+let movieList = [];
+let cityIcon = null
+
 
 $(document).keypress(function(event) {
     var keycode = event.keyCode || event.which;
-	event.preventDefault();
-    if(keycode == '13') {
-        $searchCard.hide();
-        loadingScreen();
-        getMovie();
 
-         }
+		if (keycode == "13" ) 
+		{
+			event.preventDefault();
+			locationVal = $textInput.val();
+			
+			if (locationVal === "") 
+			{
+				$modalBtn1.click();
+				return;
+			}
+	
+			if (getMovie() === false){
+				console.log(getMovie());
+				$modalBtn1.click();
+				return;
+			}
+			else
+			{
+				console.log("this went through enter");
+			$searchCard.hide();
+			loadingScreen();
+			}
+
+			
+			
+			
+		}
     });
 
-function handleSubmit(event) {
-	event.preventDefault();
-	console.log("test")
-	$searchCard.hide();
-	loadingScreen();
+// function handleSubmit(event) {
+// 	event.preventDefault();
+// 	console.log("test")
+// 	$searchCard.hide();
+// 	loadingScreen();
 
-    getMovie();
+//     getMovie();
    
 
-};
+// };
 
 function fetchWeather() { //start Liza
-	var key = "0d556524fc925415c387efcd51d5b68a"; //cameron it didnt workvar searchedName = data.city.name;
+
 	var newCity = $("#cityInput").val();
 	//this will be var location
 	var requestUrl2 = `https://api.openweathermap.org/data/2.5/weather?q=${newCity}&appid=${WEATHERKEY}&units=imperial`;
 	console.log(newCity); // sanity check
 	fetch(requestUrl2)
 		.then(function (response) {
-			return response.json();
+			if (response.status !== 200) 
+			{
+				$modalBtn1.click();
+				return Promise.reject(response)
+			}
+			else{
+				return response.json();
+			}
+			
 		})
 		.then(function (data) {
-			console.log(data);
+			if (data === false) {
+				console.log(data);
+				return
+			}
+			
 			cityName = data.name;
 			let nameChange = $("#cityWeather"); // need more specific selector,, this changes the ttile of all the cards
 			nameChange.text(cityName);
@@ -70,6 +107,10 @@ function fetchWeather() { //start Liza
 			);
 			console.log(cityIcon);
       return cityIcon;
+		}).catch((error) => {
+			console.log("weather not found");
+			console.log(error)
+			return false;
 		});
 }
 //end Liza
@@ -89,30 +130,33 @@ $movieCard.hide();
 
 
 // When search button is clicked
-$searchBtn.on('click', function (event) {
+$searchBtn.on("click", function (event) {
+	locationVal = $textInput.val();
+
+	if (locationVal === "") {
+		$modalBtn1.click();
+		return;
+	}
+
+	if (getMovie() == false) {
+		$modalBtn1.click();
+		return;
+	} else {
+		$searchCard.hide();
+		console.log("this went through click");
+		loadingScreen();
+	}
+
 	
-
-  var location = $textInput.val();
-
-  if (location === ""){
-    $modalBtn1.click();
-    return;
-  }
-
-  $searchCard.hide();
-  loadingScreen();
-  getMovie();
-
 });
 
 $newSearchBtn.on('click', function (event) {
-
-location = "";
+event.preventDefault();
+locationVal = "";
 
   $weatherCard.hide();
   $movieCard.hide();
   $searchCard.show();
-
 
 });
 
@@ -164,11 +208,19 @@ const weatherIconList = [
 				const movieTitleEl = $('#movieTitle')
 				const movieTagEL = $('#movieTag');
 				const ratingEL = $('#rating');
-let movieList = [];
+
 function getMovie() {
-fetchWeather();
+
+if (fetchWeather() === false) {
+	console.log("weather not found");
+	return false;
+}
 	setTimeout(function () {
+		movieList = [];
 		let weather_conditions = cityIcon;
+		if (weather_conditions === null) {
+			return false
+		}
    console.log( weather_conditions);
 		// when i get a weather condition
 		// i choose appropriate genres to match
@@ -182,14 +234,15 @@ fetchWeather();
 				id1: 14,
 				id2: null,
 			};
-      console.log( genre );
 		} else if (weather_conditions === "02d" || weather_conditions === "02n") {
 			//action adventure
 			genre = {
 				id1: 28,
 				id2: 12,
 			};
+
 		} else if (weather_conditions === "03d" ||  weather_conditions ==="03n") {
+
 			//mystery
 			genre = {
 				id1: 9648,
@@ -197,6 +250,7 @@ fetchWeather();
 			};
 		} else if (weather_conditions === "04d" || weather_conditions === "04n") {
 			//scifi
+			console.log("scifi")
 			genre = {
 				id1: 878,
 				id2: null,
@@ -214,13 +268,17 @@ fetchWeather();
 				id1: 99,
 				id2: null,
 			};
-		} else if (weather_conditions === "11d" ||  weather_conditions ==="11n") {
+
+		} else if (weather_conditions === "11d" ||  weather_conditions === "11n") {
+
 			//crime
 			genre = {
 				id1: 80,
 				id2: null,
 			};
-		} else if (weather_conditions === "13d" ||  weather_conditions ==="13n") {
+
+		} else if (weather_conditions === "13d" ||  weather_conditions === "13n") {
+
 			//family animation
 			genre = {
 				id1: 10751,
@@ -263,6 +321,7 @@ fetchWeather();
 				}
 				movieList.push(newMovie)
 				}
+				console.log(movieList);
 				movieTitleEl.text(movieList[0].title)
 				movieTagEL.text(movieList[0].tagline)
 				ratingEL.text(`Rating ${movieList[0].rating}`)
