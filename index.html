@@ -12,7 +12,7 @@
     />
     <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      href="https://fonts.googleapis.com/css?family=Sono:300,400,500,700&display=swap"
       rel="stylesheet"
     />
     <!-- MDB -->
@@ -47,7 +47,7 @@
       <!-- Jumbotron -->
     </header>
     <div class="container">
-      <div class="row">
+      <div class="row ">
         <div id="search">
           <form class="d-grid gap-2 pb-2 mx-auto " style="width: 80%">
             <div class="mb-3">
@@ -64,55 +64,56 @@
             <button id="searchButton" class="btn btn-primary" type="button" >
               Search
             </button>
-            
+            <div>
+              <h3>Search History:</h3>
+              <ul id="history"></ul>git 
+            </div>
           </form>
         </div>
-
-        <div id="weather-card" class="col-3">
-          <div class="card">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
-              class="card-img-top"
-              alt="Fissure in Sandstone"
-            />
-
-            <div class="card-body">
-
-              <h5 id="cityWeather" class="card-title">Weather Conditions</h5>
-              <p class="card-text" id="temperature">
-              </p>
-
-              <p class="card-text" id="weather-description">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
+        <div class="d-flex justify-content-md-evenly">
+          <div id="weather-card" class="col-3">
+            <div class="card">
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp" class="card-img-top"
+                alt="Fissure in Sandstone" />
+        
+              <div class="card-body">
+        
+                <h5 id="cityWeather" class="card-title">Weather Conditions</h5>
+                <p class="card-text" id="temperature">
+                </p>
+        
+                <p class="card-text" id="weather-description">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+            </div>
+          </div>
+        
+          <h2>place holder for loading screen</h2>
+        
+          <div id="movie-card" class="col-3">
+            <div class="card">
+        
+        
+              <div class="card-body">
+                <h5 id="movieTitle" class="card-title"></h5>
+                <p id="movieTag" class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <p id="rating" class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#!" class="btn btn-primary" id="newSearchButton">Home</a>
+                <a href="#!" class="btn btn-primary" id="nextMovie">Not your speed?</a>
+              </div>
             </div>
           </div>
         </div>
-
-        <h2>place holder for loading screen</h2>
-
-        <div id="movie-card" class="col-3">
-          <div class="card">
-
-
-            <div class="card-body">
-              <h5 id="movieTitle" class="card-title"></h5>
-              <p id="movieTag" class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <p id="rating" class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#!" class="btn btn-primary" id="newSearchButton">Home</a>
-              <a href="#!" class="btn btn-primary" id="nextMovie">Not your speed?</a>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
+        </div>
       <footer class="text-center text-lg-start bg-light text-muted">
       <section
         class="d-flex justify-content-center justify-content-lg-between p-4"></section>

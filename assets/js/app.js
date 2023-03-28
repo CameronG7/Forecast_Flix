@@ -19,50 +19,89 @@ var $newSearchBtn = $("#newSearchButton");
 var locationVal = ""
 let movieList = [];
 let cityIcon = null
+let apiCheck = true
 
+$(document).keypress(function (event) {
+	var keycode = event.keyCode || event.which;
 
-$(document).keypress(function(event) {
-    var keycode = event.keyCode || event.which;
+	if (keycode == "13") {
+		event.preventDefault();
+		locationVal = $textInput.val();
 
-		if (keycode == "13" ) 
+		if (locationVal === "") 
 		{
-			event.preventDefault();
-			locationVal = $textInput.val();
-			
-			if (locationVal === "") 
-			{
-				$modalBtn1.click();
-				return;
-			}
-	
-			if (getMovie() === false){
-				console.log(getMovie());
-				$modalBtn1.click();
-				return;
-			}
-			else
-			{
-				console.log("this went through enter");
-			$searchCard.hide();
-			loadingScreen();
-			}
-
-			
-			
-			
+			$modalBtn1.click();
+			return;
 		}
-    });
+		getMovie();
+		setTimeout(function () {
+			if (apiCheck === true) 
+			{
+				storeToLocalStorage(locationVal);
+				$searchCard.hide();
+				console.log("this went through click");
+				loadingScreen();
+			}
+			if (apiCheck == false) 
+			{
+				apiCheck = true;
+				$modalBtn1.click();
+				return;
+			}
+		}, 500);
+	}
+	
+});
 
-// function handleSubmit(event) {
-// 	event.preventDefault();
-// 	console.log("test")
-// 	$searchCard.hide();
-// 	loadingScreen();
+$searchBtn.on("click", function (event) {
+	locationVal = $textInput.val();
 
-//     getMovie();
-   
+	if (locationVal === "") {
+		$modalBtn1.click();
+		return;
+	}
+	getMovie();
+	setTimeout(function () {
 
-// };
+	if (apiCheck === true) { 
+		storeToLocalStorage(locationVal);
+		$searchCard.hide();
+		console.log("this went through click");
+		loadingScreen();
+	}
+	if (apiCheck== false) {
+		apiCheck = true;
+		$modalBtn1.click();
+		return;
+	}	
+	},500)
+	 
+	
+	
+});
+
+function storeToLocalStorage(location) {
+	new_data = location;
+	if (localStorage.getItem("data") == null) {
+	  localStorage.setItem("data", "[]");
+	}
+	old_data = JSON.parse(localStorage.getItem("data"));
+	old_data.push(new_data);
+	localStorage.setItem("data", JSON.stringify(old_data));
+  
+  }
+  
+  var searchHis = $("#history");
+  
+  var recentSearch = JSON.parse(localStorage.getItem("data")) || [];
+  if (recentSearch !== null) {
+	for (var i = 0; i < recentSearch.length; i++) {
+	  var buttonEl = $("<li>");
+	  buttonEl.text(`${recentSearch[i]}`);
+	  searchHis.prepend(buttonEl);
+	  console.log(recentSearch[0]);
+	}
+  }
 
 function fetchWeather() { //start Liza
 
@@ -74,8 +113,9 @@ function fetchWeather() { //start Liza
 		.then(function (response) {
 			if (response.status !== 200) 
 			{
+				apiCheck = false; 
 				$modalBtn1.click();
-				return Promise.reject(response)
+				return 
 			}
 			else{
 				return response.json();
@@ -83,10 +123,7 @@ function fetchWeather() { //start Liza
 			
 		})
 		.then(function (data) {
-			if (data === false) {
-				console.log(data);
-				return
-			}
+			
 			
 			cityName = data.name;
 			let nameChange = $("#cityWeather"); // need more specific selector,, this changes the ttile of all the cards
@@ -110,7 +147,7 @@ function fetchWeather() { //start Liza
 		}).catch((error) => {
 			console.log("weather not found");
 			console.log(error)
-			return false;
+			return Promise.reject() ;
 		});
 }
 //end Liza
@@ -130,25 +167,7 @@ $movieCard.hide();
 
 
 // When search button is clicked
-$searchBtn.on("click", function (event) {
-	locationVal = $textInput.val();
 
-	if (locationVal === "") {
-		$modalBtn1.click();
-		return;
-	}
-
-	if (getMovie() == false) {
-		$modalBtn1.click();
-		return;
-	} else {
-		$searchCard.hide();
-		console.log("this went through click");
-		loadingScreen();
-	}
-
-	
-});
 
 $newSearchBtn.on('click', function (event) {
 event.preventDefault();
@@ -157,6 +176,7 @@ locationVal = "";
   $weatherCard.hide();
   $movieCard.hide();
   $searchCard.show();
+  location.reload();
 
 });
 
@@ -210,16 +230,16 @@ const weatherIconList = [
 				const ratingEL = $('#rating');
 
 function getMovie() {
+fetchWeather()
 
-if (fetchWeather() === false) {
-	console.log("weather not found");
-	return false;
-}
 	setTimeout(function () {
+		if (apiCheck === false) {
+			return;
+		}
 		movieList = [];
 		let weather_conditions = cityIcon;
 		if (weather_conditions === null) {
-			return false
+			return;
 		}
    console.log( weather_conditions);
 		// when i get a weather condition
