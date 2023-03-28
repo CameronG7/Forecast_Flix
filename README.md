@@ -21,10 +21,10 @@
 - Here's another suggestion!
 
 ![image](https://user-images.githubusercontent.com/122588135/228097035-f0775ebd-affb-4dfc-9991-961b018e9665.png)
-- Look at your past history ;)
+- When you return home you can look at your past history ;)
 
 ![image](https://user-images.githubusercontent.com/122588135/228097320-75d0e306-d4ae-41d4-95d0-256003c9220e.png)
-- YOU HAVE TO input a city or you will get a modul error.
+- Think you can trick the system? YOU HAVE TO input a city or you will get a modul error.
 
 
 ## Technologies
