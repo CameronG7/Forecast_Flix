@@ -17,11 +17,14 @@
 ![image](https://user-images.githubusercontent.com/122588135/228051575-d606b823-6dac-431a-ba20-1ac31b1f5888.png)
 - Seen that movie before or would like to get a couple more recommendations? No worries just hit not your speed and we'll find you some more.
 
-![image](https://user-images.githubusercontent.com/122588135/228096963-ef01a8b6-3893-46ad-b07e-07ec4ca2e819.png)
+![image](https://user-images.githubusercontent.com/122588135/228097440-67396289-d5d6-47c9-a2d7-a9eaf0fe5f49.png)
 - Here's another suggestion!
 
 ![image](https://user-images.githubusercontent.com/122588135/228097035-f0775ebd-affb-4dfc-9991-961b018e9665.png)
 - Look at your past history ;)
+
+![image](https://user-images.githubusercontent.com/122588135/228097320-75d0e306-d4ae-41d4-95d0-256003c9220e.png)
+- YOU HAVE TO input a city or you will get a modul error.
 
 
 ## Technologies
